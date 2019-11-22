@@ -1,0 +1,4 @@
+class Traducao {
+  portuguese;
+  javascriptCode;
+}
