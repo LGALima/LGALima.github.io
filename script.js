@@ -1,4 +1,3 @@
-
 document.getElementById("content").innerHTML =
 localStorage["text"] || "Digite seu codigo"; // default text
 setInterval(function() {
@@ -7,9 +6,9 @@ setInterval(function() {
 }, 1000);
 
 let palavrasReservadas = [
-  { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080' },
+  { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080', tooltip: 'Estrutura de repetição'},
   { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080' },
-  { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01' },
+  { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01', tooltip: 'Imprimir' },
   { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401' },
   { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401' },
   { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401' },
@@ -142,7 +141,7 @@ function gerarSaida() {
 
 function mudarCorDoCodigo(codigoJavasScript) {
   for (let i = 0; i < palavrasReservadas.length; i++) {
-    codigoJavasScript = codigoJavasScript.replace(palavrasReservadas[i].javascriptCode, '<span style="color:' 
+    codigoJavasScript = codigoJavasScript.replace(palavrasReservadas[i].javascriptCode, '<span data-toggle="tooltip" data-placement="left" title="'+ palavrasReservadas[i].tooltip +'" style="color:' 
       + palavrasReservadas[i].color + '">' + palavrasReservadas[i].javascriptCode + '</span>');
   }
   return codigoJavasScript
