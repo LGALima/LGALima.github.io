@@ -29,3 +29,13 @@
   height: 400px;
   border: 1px solid gray;
 }
+
+#content {
+  padding-top: 10px;
+  font-size: 12px;
+  overflow: auto;
+}
+
+#content::-webkit-scrollbar {
+  width: 5px;
+}

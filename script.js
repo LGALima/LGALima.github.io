@@ -1,37 +1,36 @@
-// let portuguesToCodeWords = [
-//   'enquanto:while',
-//   'para:for',
-//   'imprima:alert',
-//   'senao:else', 'se:if',
-//   'retorno:return',
-//   'leia:prompt("Digite o valor da variavel ")',
-//   'tamanho:length', 'adicionar:push'
-// ];
 
-let portuguesToCodeWords = [
-  { portuguese: /\benquanto\b/i , javascriptCode: 'while' },
-  { portuguese: /\bpara\b/i , javascriptCode: 'for' },
-  { portuguese: /\bimprima\b/i, javascriptCode: 'alert' },
-  { portuguese: /\bsenao\b/i, javascriptCode: 'else' },
-  { portuguese: /\bse\b/i, javascriptCode: 'if' },
-  { portuguese: /\bretorno\b/i, javascriptCode: 'return' },
-  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor da variavel ")' },
-  { portuguese: /\btamanho\b/i, javascriptCode: 'length' },
-  { portuguese: /\badicionar\b/i, javascriptCode: 'push' },
-  { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var'}
+document.getElementById("content").innerHTML =
+localStorage["text"] || "This text is automatically saved every second :) "; // default text
+setInterval(function() {
+  // fuction that is saving the innerHTML of the div
+  localStorage["text"] = document.getElementById("content").innerHTML; // content div
+}, 1000);
+
+let palavrasReservadas = [
+  { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080' },
+  { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080' },
+  { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01' },
+  { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401' },
+  { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401' },
+  { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401' },
+  { portuguese: /\bretorno\b/i, javascriptCode: 'return', color: '#e3e' },
+  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01' },
+  { portuguese: /\btamanho\b/i, javascriptCode: 'length', color: '#e3e' },
+  { portuguese: /\badicionar\b/i, javascriptCode: 'push', color: '#e3e' },
+  { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var', color: '#0404B4' },
+  { portuguese: /\be\b/i, javascriptCode: '&&', color: '#4e4'},
+  { portuguese: /\bou\b/i, javascriptCode: '||', color: '#4e4'}
 ];
 
-let indentacaoToCode = [';:;<br>', '{:{<br>', '}:<br>}<br>'];
+let simbolosReservados = ['&lt;:<', '&gt;:>'];
 let podeCompilar;
 let erros = [];
-let codigoIndentado;
-/////////////////////functions
+let codigoJavasScript;
+/////////////////////functions//////////////////////////////////
 
 function convertTextToCode(texto) {
-  portuguesToCodeWords.forEach(element => {
-    if (texto.replace(element.portuguese , element.javascriptCode) !== undefined) {
-      texto = texto.replace(element.portuguese, element.javascriptCode);
-    }
+  palavrasReservadas.forEach(element => {
+    texto = texto.replace(element.portuguese, element.javascriptCode);
   });
   return texto;
 }
@@ -94,7 +93,8 @@ function atualizar() {
   podeCompilar = true;
   erros = [];
 
-  texto = document.getElementById('codigo').value;
+  texto = localStorage['text'];
+  console.log(localStorage['text'])
   let codigo;
   if (texto) {
     let arrTexto = texto.split(';');
@@ -105,11 +105,14 @@ function atualizar() {
     verificarSintaxeDeEscopo(codigo, '(', ')');
     verificarSintaxeDeEscopo(codigo, '{', '}');
     verificarSintaxeDeEscopo(codigo, '[', ']');
-    indentarCodigo(codigo);
-    document.getElementById('codigoJs').innerHTML = codigoIndentado;
+    codigo = indentarCodigo(codigo);
+    codigoJavasScript = mudarCorDoCodigo(codigo);
+    document.getElementById('codigoJs').innerHTML = codigoJavasScript;
+    let codigoExecutavel = removerDivEEspacoParaTornarExecutavel(codigo);
+    console.log(codigoExecutavel);
     if (podeCompilar) {
       try {
-        eval(codigo);
+        eval(codigoExecutavel);
         erros.push('<span style="color: rgb(31, 177, 31);">Compilado com sucesso;</span><br>')
       } catch (e) {
         erroDeCompilacao('Comando(s) inválido(s);');
@@ -119,18 +122,16 @@ function atualizar() {
   }
 }
 
-function indentarCodigo(codigo){
-  // indentacaoToCode.forEach(element => {
-  //   let parte = element.split(":");
-  //   console.log(parte);
-  //   codigoIndentado = codigo.replace(parte[0], parte[1]);
-  // });
+function removerDivEEspacoParaTornarExecutavel(codigo) {
+  return codigo.split('<div>').join(' ').split('</div>').join(' ').split('&nbsp;').join('');
+}
 
-  for(let i = 0; i < indentacaoToCode.length; i++) {
-    let parte = indentacaoToCode[i].split(":");
-    codigoIndentado = codigo.replace(parte[0], parte[1]);
-    console.log(codigoIndentado)
+function indentarCodigo(codigo) {
+  for (let i = 0; i < simbolosReservados.length; i++) {
+    let parte = simbolosReservados[i].split(":");
+      codigo = codigo.replace(parte[0], parte[1]);    
   }
+  return codigo;
 }
 
 function gerarSaida() {
@@ -139,3 +140,17 @@ function gerarSaida() {
   consoleErro.innerHTML = errosHTML;
 }
 
+function mudarCorDoCodigo(codigoJavasScript) {
+  for (let i = 0; i < palavrasReservadas.length; i++) {
+    codigoJavasScript = codigoJavasScript.replace(palavrasReservadas[i].javascriptCode, '<span style="color:' 
+      + palavrasReservadas[i].color + '">' + palavrasReservadas[i].javascriptCode + '</span>');
+  }
+  return codigoJavasScript
+}
+
+function mudarCorDoTexto(texto){
+  for(let i = 0; i < palavrasReservadas.length; i++) {
+    texto = texto.replace(palavrasReservadas[i].portuguese, '<span style="color:' 
+    + palavrasReservadas[i].color + '">' + palavrasReservadas[i].portuguese + '</span>');
+  }
+}
