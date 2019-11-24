@@ -7,18 +7,18 @@ setInterval(function() {
 
 let palavrasReservadas = [
   { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080', tooltip: 'Estrutura de repetição'},
-  { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080' },
+  { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080', tooltip: 'Estrutura de repetição' },
   { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01', tooltip: 'Imprimir' },
-  { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401' },
-  { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401' },
-  { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401' },
-  { portuguese: /\bretorno\b/i, javascriptCode: 'return', color: '#e3e' },
-  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01' },
-  { portuguese: /\btamanho\b/i, javascriptCode: 'length', color: '#e3e' },
-  { portuguese: /\badicionar\b/i, javascriptCode: 'push', color: '#e3e' },
-  { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var', color: '#0404B4' },
-  { portuguese: /\be\b/i, javascriptCode: '&&', color: '#4e4'},
-  { portuguese: /\bou\b/i, javascriptCode: '||', color: '#4e4'}
+  { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401', tooltip: 'Condicional' },
+  { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401', tooltip: 'Condicional' },
+  { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401', tooltip: 'Condicional' },
+  { portuguese: /\bretorno\b/i, javascriptCode: 'return', color: '#e3e', tooltip: 'Retorna o valor' },
+  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
+  { portuguese: /\btamanho\b/i, javascriptCode: 'length', color: '#e3e', tooltip: 'Retorna o tamanho do array' },
+  { portuguese: /\badicionar\b/i, javascriptCode: 'push', color: '#e3e', tooltip: 'Adiciona um elemento a um array' },
+  { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var', color: '#0404B4', tooltip: 'Notação para se declarar uma variavél' },
+  { portuguese: /\be\b/i, javascriptCode: '&&', color: '#4e4', tooltip: 'Operador lógico &&(e)'},
+  { portuguese: /\bou\b/i, javascriptCode: '||', color: '#4e4', tooltip: 'Operador lógico ||(ou)'}
 ];
 
 let simbolosReservados = ['&lt;:<', '&gt;:>'];
