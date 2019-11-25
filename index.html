@@ -27,27 +27,24 @@
   </nav>
 
   <div class="container">
-    <div class="row mt-3">
+    <div class="row mt-3 no-gutters">
       <div class="col-6">
-        <button class="btn btn-primary form-control" onclick="atualizar()" onsubmit="atualizar()">converter</button>
+        <button class="btn btn-primary form-control" onclick="atualizar()">converter</button>
       </div>
       <div class="col-6 text-center">
         <span style="color: rgb(29, 158, 29);">JavaScript</span>
       </div>
     </div>
-    <div class="row mt-1">
+    <div class="row mt-1 no-gutters">
       <div class="col-12 col-md-6" style="height: 500px;">
-        <div id="content" spellcheck="false" contenteditable="true" style="height: 500px;"></div>
-        <!-- <textarea class="textarea-codigo" id="codigo" style="resize: none" name="codigo"></textarea><br> -->
+        <div id="content" onkeydown="onKeyDown(event)" spellcheck="false" contenteditable="true" style="height: 500px;"></div>
       </div>
       <div class="col-12 col-md-6">
-        <div class="row">
-          <div class="col-12" id="campo-codigoJs">
+        <div class="col-12" id="campo-codigoJs">
             <div id="codigoJs"></div>
-          </div>
-          <div class="col-12" id="console-erro">
+        </div>
+        <div class="col-12" id="console-erro">
 
-          </div>
         </div>
       </div>
     </div>
@@ -56,7 +53,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-12" style="color: rgb(196, 28, 22)">
+      <div class="col-6 col-sm-4" style="color: rgb(196, 28, 22)">
         <p>variavel x = 0; --- declaracao de variavel(tipo any)</p>
         <p>x = leia; --- ler valor</p>
         <p>imprima(""); --- imprime o valor inserido</p>
@@ -68,13 +65,7 @@
       </div>
     </div>
   </div>
-  <!-- <div class="container">
-    <div class="row mt-1" id="console">
-      <div class="col-12" id="console-erro">
-
-      </div>
-    </div>
-  </div> -->
+  
   <script src="script.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -86,5 +77,4 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
 </body>
-
 </html>
