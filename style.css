@@ -21,7 +21,7 @@
   background-color: gray;
 }
 
-#campo-codigoJs{
+#campo-codigoJs {
   height: 400px;
   border-top-right-radius: 10px;
   border: 1px solid gray;
@@ -35,7 +35,7 @@
   background-color: rgb(63, 63, 63);
   color: #fff;
   overflow: auto;
-  outline:none;
+  outline: none;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -43,8 +43,26 @@
 #content::-webkit-scrollbar {
   width: 5px;
 }
+
 #content::-webkit-scrollbar-thumb {
   border-radius: 15px;
   background-color: gray;
 }
 
+
+.palavras-reservadas-titulo {
+  background-color: darkgrey;
+  color: red;
+  padding: 5px 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.palavras-reservadas-content {
+  background-color: lightgray;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+}

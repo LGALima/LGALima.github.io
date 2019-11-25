@@ -25,7 +25,6 @@ function onKeyDown(e) {
   }
 }
 
-
 let palavrasReservadas = [
   { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080', tooltip: 'Estrutura de repetição' },
   { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080', tooltip: 'Estrutura de repetição' },
