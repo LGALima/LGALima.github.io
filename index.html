@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="#" >Home</a>
         </li>
       </ul>
     </div>
@@ -29,15 +29,16 @@
   <div class="container">
     <div class="row mt-3 no-gutters">
       <div class="col-6">
-        <button class="btn btn-primary form-control" onclick="atualizar()">converter</button>
+        <div class="content-header" onclick="atualizar()"><b>Converter</b></div>
       </div>
       <div class="col-6 text-center">
-        <span style="color: rgb(29, 158, 29);">JavaScript</span>
+        <div class="codigoJs-header"><b>JavaScript</b></div>
       </div>
     </div>
-    <div class="row mt-1 no-gutters">
-      <div class="col-12 col-md-6" style="height: 500px;">
-        <div id="content" onkeydown="onKeyDown(event)" spellcheck="false" contenteditable="true" style="height: 500px;">
+    <div class="row no-gutters">
+      <div class="col-12 col-md-6" style="height: 500px; display: block;">
+        <div id="content-lateral"></div>
+        <div id="content" onkeydown="onKeyDown(event); " onkeyup="selecionarLinha(event);" spellcheck="false" contenteditable="true" >
         </div>
       </div>
       <div class="col-12 col-md-6">

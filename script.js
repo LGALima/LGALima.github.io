@@ -1,5 +1,6 @@
 
-document.getElementById("content").innerHTML = "Digite seu código"; //texto default
+document.getElementById('content').innerHTML = '<div class="selecionado">imprima("Digite o seu código!!");</div>'; //texto default
+document.getElementById('content-lateral').innerHTML = '<div>1</div>'
 
 String.prototype.replaceAll = function (str1, str2, ignore) {
   return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof (str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
@@ -8,16 +9,16 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 function onKeyDown(e) {
   if (e.keyCode === 9) { // tab key
     e.preventDefault();  // this will prevent us from tabbing out of the editor
-
+    
     // now insert four non-breaking spaces for the tab key
     var editor = document.getElementById("content");
     var doc = editor.ownerDocument.defaultView;
     var sel = doc.getSelection();
     var range = sel.getRangeAt(0);
-
+    
     var tabNode = document.createTextNode("\u00a0\u00a0\u00a0\u00a0");
     range.insertNode(tabNode);
-
+    
     range.setStartAfter(tabNode);
     range.setEndAfter(tabNode);
     sel.removeAllRanges();
@@ -25,18 +26,38 @@ function onKeyDown(e) {
   }
 }
 
+function selecionarLinha(e) {
+  if (e.key === 'Enter' || e.key === 'Backspace') { 
+    let content = document.querySelectorAll('#content div');
+    content.forEach(element => {
+      element.classList.add('selecionado');
+    });
+    let arr = [];
+    for(let linha = 1; linha <= content.length; linha++){
+      arr.push('<div>' + linha + '</div>');
+    }
+    document.getElementById('content-lateral').innerHTML = arr.join(' ');
+  }
+} ////////////////////////ighcshoijhibhsvih te
+
 let palavrasReservadas = [
   { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080', tooltip: 'Estrutura de repetição' },
   { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080', tooltip: 'Estrutura de repetição' },
+  
   { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01', tooltip: 'Imprimir' },
+  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
+  
   { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401', tooltip: 'Condicional' },
   { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401', tooltip: 'Condicional' },
   { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401', tooltip: 'Condicional' },
+
   { portuguese: /\bretorno\b/i, javascriptCode: 'return', color: '#e3e', tooltip: 'Retorna o valor' },
-  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
+
   { portuguese: /\btamanho\b/i, javascriptCode: 'length', color: '#e3e', tooltip: 'Retorna o tamanho do array' },
   { portuguese: /\badicionar\b/i, javascriptCode: 'push', color: '#e3e', tooltip: 'Adiciona um elemento a um array' },
+
   { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var', color: '#0404B4', tooltip: 'Notação para se declarar uma variavél' },
+
   { portuguese: /\be\b/i, javascriptCode: '&&', color: '#4e4', tooltip: 'Operador lógico &&(e)' },
   { portuguese: /\bou\b/i, javascriptCode: '||', color: '#4e4', tooltip: 'Operador lógico ||(ou)' }
 ];
@@ -114,6 +135,7 @@ function atualizar() {
   erros = [];
 
   let texto = document.getElementById("content").innerHTML;
+  console.log(document.getElementById('content'));
   let codigo;
   if (texto) {
     let arrTexto = texto.split(';');
@@ -124,6 +146,7 @@ function atualizar() {
     verificarSintaxeDeEscopo(codigo, '(', ')');
     verificarSintaxeDeEscopo(codigo, '{', '}');
     verificarSintaxeDeEscopo(codigo, '[', ']');
+
     codigoJavasScript = mudarCorDoCodigo(codigo);
     codigo = mudarSimbolosReservados(codigo);
     document.getElementById('codigoJs').innerHTML = codigoJavasScript;
@@ -131,10 +154,10 @@ function atualizar() {
     console.log(codigoExecutavel);
     if (podeCompilar) {
       try {
-          codigoExecutavel = 'function execute() {' + codigoExecutavel + '}';
-          eval(codigoExecutavel)
-          retorno = execute();
-          console.log(retorno);
+        codigoExecutavel = 'function execute() {' + codigoExecutavel + '}';
+        eval(codigoExecutavel)
+        retorno = execute();
+        console.log(retorno);
         erros.push('<span style="color: rgb(31, 177, 31);">Compilado com sucesso;</span><br>')
       } catch (e) {
         erroDeCompilacao('Comando(s) inválido(s);');
@@ -145,7 +168,7 @@ function atualizar() {
 }
 
 function removerDivEEspacoParaTornarExecutavel(codigo) {
-  return codigo.split('<div>').join(' ').split('</div>').join(' ').split('&nbsp;').join('').split('<br>').join('');
+  return codigo.split('<div class="selecionado">').join(' ').split('</div>').join(' ').split('&nbsp;').join('').split('<br>').join('');
 }
 
 function mudarSimbolosReservados(codigo) {
@@ -163,6 +186,7 @@ function gerarSaida() {
 }
 
 function mudarCorDoCodigo(codigoJavasScript) {
+  codigoJavasScript = codigoJavasScript.replaceAll('class="selecionado"', '');
   for (let i = 0; i < palavrasReservadas.length; i++) {
     codigoJavasScript = codigoJavasScript.replaceAll(palavrasReservadas[i].javascriptCode, '<span data-toggle="tooltip" data-placement="left" title="' + palavrasReservadas[i].tooltip + '" style="color:'
       + palavrasReservadas[i].color + '">' + palavrasReservadas[i].javascriptCode + '</span>');
