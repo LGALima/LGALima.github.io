@@ -1,5 +1,5 @@
 
-document.getElementById('content').innerHTML = '<div class="selecionado">imprima("Digite o seu código!!");</div>'; //texto default
+document.getElementById('content').innerHTML = '<div>imprima("Digite o seu código!!");</div>'; //texto default
 document.getElementById('content-lateral').innerHTML = '<div>1</div>'
 
 String.prototype.replaceAll = function (str1, str2, ignore) {
@@ -32,23 +32,17 @@ function onScrollContent() {
   contentLateral.scrollTop = content.scrollTop;
 }
 
-function onScrollContentLateral() {
-  var content = document.getElementById("content");
-  var contentLateral = document.getElementById("content-lateral");
-  content.scrollTop = contentLateral.scrollTop;
-}
-
-
 function selecionarLinha(e) {
   let content = document.querySelectorAll('#content div');
-  content.forEach(element => {
-    element.classList.add('selecionado');
-  });
-  let arr = [];
-  for (let linha = 1; linha <= content.length; linha++) {
-    arr.push('<div>' + linha + '</div>');
+  if (content.length !== 0) {
+    let arr = [];
+    content.forEach((element, index) => {
+      arr.push('<div style="height: ' + element.clientHeight + 'px">' + (index + 1) + '</div>');
+    });
+    document.getElementById('content-lateral').innerHTML = arr.join(' ');
+  } else {
+    document.getElementById('content-lateral').innerHTML = '<div>1</div>';
   }
-  document.getElementById('content-lateral').innerHTML = arr.join(' ');
 }
 
 let palavrasReservadas = [
@@ -56,7 +50,7 @@ let palavrasReservadas = [
   { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080', tooltip: 'Estrutura de repetição' },
 
   { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01', tooltip: 'Imprimir' },
-  { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
+  { portuguese: /\bleia\b/i, javascriptCode: 'prompt', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
 
   { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401', tooltip: 'Condicional' },
   { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401', tooltip: 'Condicional' },
@@ -69,8 +63,9 @@ let palavrasReservadas = [
 
   { portuguese: /\b(variavel|variável)\b/i, javascriptCode: 'var', color: '#0404B4', tooltip: 'Notação para se declarar uma variavél' },
 
-  { portuguese: /\be\b/i, javascriptCode: '&&', color: '#4e4', tooltip: 'Operador lógico &&(e)' },
-  { portuguese: /\bou\b/i, javascriptCode: '||', color: '#4e4', tooltip: 'Operador lógico ||(ou)' }
+  { portuguese: /\be\b/i, javascriptCode: '&&' },
+  { portuguese: /\bou\b/i, javascriptCode: '||' }
+
 ];
 
 
@@ -100,13 +95,13 @@ function verificarSintaxeDeAspas(linha) {
       });
       linha = partes.join('"');
     } else {
-      erroDeCompilacao('Erro de sintaxe, aspas não fechada;')
+      erroDeCompilacao('Erro de sintaxe, aspas não fechada;');
     }
   } else {
     linha = linha.toLowerCase();
     linha = convertTextToCode(linha);
   }
-  return linha
+  return linha;
 }
 
 function verificarSintaxeDeEscopo(codigo, aberturaDoEscopo, fechamentoDoEscopo) {
@@ -179,7 +174,7 @@ function atualizar() {
 }
 
 function removerDivEEspacoParaTornarExecutavel(codigo) {
-  return codigo.split('<div class="selecionado">').join(' ').split('</div>').join(' ').split('&nbsp;').join('').split('<br>').join('');
+  return codigo.split('<div>').join(' ').split('</div>').join(' ').split('&nbsp;').join('').split('<br>').join('');
 }
 
 function mudarSimbolosReservados(codigo) {
@@ -197,10 +192,12 @@ function gerarSaida() {
 }
 
 function mudarCorDoCodigo(codigoJavasScript) {
-  codigoJavasScript = codigoJavasScript.replaceAll('class="selecionado"', '');
   for (let i = 0; i < palavrasReservadas.length; i++) {
-    codigoJavasScript = codigoJavasScript.replaceAll(palavrasReservadas[i].javascriptCode, '<span data-toggle="tooltip" data-placement="left" title="' + palavrasReservadas[i].tooltip + '" style="color:'
-      + palavrasReservadas[i].color + '">' + palavrasReservadas[i].javascriptCode + '</span>');
+    if (palavrasReservadas[i].javascriptCode !== '||') {
+      let regexp = new RegExp('\\b' + palavrasReservadas[i].javascriptCode + '\\b', 'ig');
+      codigoJavasScript = codigoJavasScript.replace(regexp, '<span data-toggle="tooltip" data-placement="left" title="' + palavrasReservadas[i].tooltip + '" style="color:'
+        + palavrasReservadas[i].color + '">' + palavrasReservadas[i].javascriptCode + '</span>');
+    }
   }
   return codigoJavasScript
 }

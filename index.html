@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Document</title>
+  <title>Didaticator</title>
+  <link href="images/fema.png" rel="icon">
 </head>
 
 <body>
@@ -20,34 +21,37 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#" >Home</a>
+          <a class="nav-link" href="#">Home</a>
         </li>
       </ul>
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row mt-3 no-gutters">
-      <div class="col-6">
-        <div class="content-header" onclick="atualizar()"><b>Converter</b></div>
-      </div>
-      <div class="col-6 text-center">
-        <div class="codigoJs-header"><b>JavaScript</b></div>
-      </div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col-12 col-md-6" style="height: 500px; display: block;">
-        <div id="content-lateral" onscroll="onScrollContentLateral()"></div>
-        <div id="content" onkeydown="onKeyDown(event);"onscroll="onScrollContent()" onkeyup="selecionarLinha(event);" spellcheck="false" contenteditable="true" >
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="col-12" id="campo-codigoJs">
-          <div id="codigoJs"></div>
-        </div>
-        <div class="col-12" id="console-erro">
 
+      <div class="col-sm-6 col-12">
+        <div class="col-12" style="padding: 0px;">
+          <div class="content-header" onclick="atualizar()"><b>Converter</b></div>
         </div>
+        <div class="col-12" style="padding: 0px; height: 500px; display: block;">
+          <!--  -->
+          <div id="content-lateral"></div>
+          <div id="content" onkeydown="onKeyDown(event);" onscroll="onScrollContent()" onkeyup="selecionarLinha(event);"
+            spellcheck="false" contenteditable="true">
+          </div>
+          <!--  -->
+        </div>
+      </div>
+
+      <div class="col-sm-6 mt-sm-0 col-12">
+        <div class=" col-12 codigoJs-header" ><b>JavaScript</b></div>
+          <!--  -->
+          <div class="col-12" id="campo-codigoJs">
+            <div id="codigoJs"></div>
+          </div>
+          <div class="col-12" id="console-erro"></div>
+          <!--  -->
       </div>
     </div>
   </div>
@@ -60,8 +64,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-4">
-        <div id="tipo-dados">
+        <div class="col-sm-6 col-md-4">
+            <div id="tipo-dados">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Tipos de variaveis</b></span>
           </div>
@@ -70,8 +74,8 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-4">
-        <div id="interacao-usuario">
+      <div class="col-sm-6 col-md-4">
+          <div id="interacao-usuario">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Interação com Usuário</b></span>
           </div>
@@ -81,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-4">
+      <div class="col-sm-6 col-md-4">
         <div id="condicional">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Condicional</b></span>
@@ -93,8 +97,8 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-4">
-        <div id="operadores-aritmeticos">
+      <div class="col-sm-6 col-md-4">
+          <div id="operadores-aritmeticos">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Operadores Aritméticos</b></span>
           </div>
@@ -108,8 +112,8 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-md-4">
-        <div id="operadores-logicos">
+      <div class="col-sm-6 col-md-4">
+          <div id="operadores-logicos">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Operadores Lógicos</b></span>
           </div>
@@ -127,8 +131,8 @@
         </div>
       </div>
 
-      <div class="col-6 col-md-4">
-        <div id="estruturas-repeticao">
+      <div class="col-sm-6 col-md-4">
+          <div id="estruturas-repeticao">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Estruturas de repetição</b></span>
           </div>
@@ -142,13 +146,6 @@
 
     </div>
   </div>
-  <!-- <p>x = leia; --- ler valor</p>
-        <p>imprima(""); --- imprime o valor inserido</p>
-        <p>se(condicao) {} senao{} --- condional </p>
-        <p>enquanto(condicao){} --- estrutura de repeticao</p>
-        <p>para(variavel x; condicao; incremento) {}</p>
-        <p>e/ou --- operador logico</p>
-        <p>:)</p> -->
 
   <script src="script.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
