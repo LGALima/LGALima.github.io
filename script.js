@@ -9,16 +9,16 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 function onKeyDown(e) {
   if (e.keyCode === 9) { // tab key
     e.preventDefault();  // this will prevent us from tabbing out of the editor
-    
+
     // now insert four non-breaking spaces for the tab key
     var editor = document.getElementById("content");
     var doc = editor.ownerDocument.defaultView;
     var sel = doc.getSelection();
     var range = sel.getRangeAt(0);
-    
+
     var tabNode = document.createTextNode("\u00a0\u00a0\u00a0\u00a0");
     range.insertNode(tabNode);
-    
+
     range.setStartAfter(tabNode);
     range.setEndAfter(tabNode);
     sel.removeAllRanges();
@@ -26,27 +26,38 @@ function onKeyDown(e) {
   }
 }
 
+function onScrollContent() {
+  var content = document.getElementById("content");
+  var contentLateral = document.getElementById("content-lateral");
+  contentLateral.scrollTop = content.scrollTop;
+}
+
+function onScrollContentLateral() {
+  var content = document.getElementById("content");
+  var contentLateral = document.getElementById("content-lateral");
+  content.scrollTop = contentLateral.scrollTop;
+}
+
+
 function selecionarLinha(e) {
-  if (e.key === 'Enter' || e.key === 'Backspace') { 
-    let content = document.querySelectorAll('#content div');
-    content.forEach(element => {
-      element.classList.add('selecionado');
-    });
-    let arr = [];
-    for(let linha = 1; linha <= content.length; linha++){
-      arr.push('<div>' + linha + '</div>');
-    }
-    document.getElementById('content-lateral').innerHTML = arr.join(' ');
+  let content = document.querySelectorAll('#content div');
+  content.forEach(element => {
+    element.classList.add('selecionado');
+  });
+  let arr = [];
+  for (let linha = 1; linha <= content.length; linha++) {
+    arr.push('<div>' + linha + '</div>');
   }
-} ////////////////////////ighcshoijhibhsvih te
+  document.getElementById('content-lateral').innerHTML = arr.join(' ');
+}
 
 let palavrasReservadas = [
   { portuguese: /\benquanto\b/i, javascriptCode: 'while', color: '#800080', tooltip: 'Estrutura de repetição' },
   { portuguese: /\bpara\b/i, javascriptCode: 'for', color: '#800080', tooltip: 'Estrutura de repetição' },
-  
+
   { portuguese: /\bimprima\b/i, javascriptCode: 'alert', color: '#D7DF01', tooltip: 'Imprimir' },
   { portuguese: /\bleia\b/i, javascriptCode: 'prompt("Digite o valor: ")', color: '#D7DF01', tooltip: 'Lê o valor digitado pelo usuário' },
-  
+
   { portuguese: /\bsenao\b/i, javascriptCode: 'else', color: '#DF7401', tooltip: 'Condicional' },
   { portuguese: /\bse\b/i, javascriptCode: 'if', color: '#DF7401', tooltip: 'Condicional' },
   { portuguese: /\bsenaose\b/i, javascriptCode: 'else if', color: '#DF7401', tooltip: 'Condicional' },
