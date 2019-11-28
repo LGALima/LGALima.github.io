@@ -217,11 +217,11 @@ function mudarCorDoCodigo(codigoJavasScript) {
   return codigoJavasScript;
 }
 
-function mudarCorDoTexto() { //com defeito
-  for (let i = 0; i < palavrasReservadas.length; i++) {
-    texto = texto.replaceAll(palavrasReservadas[i].portuguese, '<span style="color:'
-      + palavrasReservadas[i].color + '">' + palavrasReservadas[i].portuguese + '</span>');
-  }
-}
+// function mudarCorDoTexto() { //com defeito
+//   for (let i = 0; i < palavrasReservadas.length; i++) {
+//     texto = texto.replaceAll(palavrasReservadas[i].portuguese, '<span style="color:'
+//       + palavrasReservadas[i].color + '">' + palavrasReservadas[i].portuguese + '</span>');
+//   }
+// }
 
 
