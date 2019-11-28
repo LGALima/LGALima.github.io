@@ -3,9 +3,10 @@
   background-color: rgb(82, 82, 82);
 }
 
-div[contenteditable="true"]:focus>div:hover {
+#content[contenteditable="true"]>div:hover {
   background-color: rgb(82, 82, 82);
 }
+
 
 #console-erro {
   background-color: #000;

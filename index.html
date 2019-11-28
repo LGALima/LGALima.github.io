@@ -32,26 +32,26 @@
 
       <div class="col-sm-6 col-12">
         <div class="col-12" style="padding: 0px;">
-          <div class="content-header" onclick="atualizar()"><b>Converter</b></div>
+          <div class="content-header" onclick="compilar()"><b>Converter</b></div>
         </div>
         <div class="col-12" style="padding: 0px; height: 500px; display: block;">
           <!--  -->
           <div id="content-lateral"></div>
-          <div id="content" onkeydown="onKeyDown(event);" onscroll="onScrollContent()" onkeyup="selecionarLinha(event);"
-            spellcheck="false" contenteditable="true">
+          <div id="content" onkeydown="onKeyDown(event); selecionarLinha(event)" onscroll="onScrollContent()"
+            onkeyup="selecionarLinha();" spellcheck="false" contenteditable="true">
           </div>
           <!--  -->
         </div>
       </div>
 
       <div class="col-sm-6 mt-sm-0 col-12">
-        <div class=" col-12 codigoJs-header" ><b>JavaScript</b></div>
-          <!--  -->
-          <div class="col-12" id="campo-codigoJs">
-            <div id="codigoJs"></div>
-          </div>
-          <div class="col-12" id="console-erro"></div>
-          <!--  -->
+        <div class=" col-12 codigoJs-header"><b>JavaScript</b></div>
+        <!--  -->
+        <div class="col-12" id="campo-codigoJs">
+          <div id="codigoJs"></div>
+        </div>
+        <div class="col-12" id="console-erro"></div>
+        <!--  -->
       </div>
     </div>
   </div>
@@ -64,8 +64,8 @@
       </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-4">
-            <div id="tipo-dados">
+      <div class="col-sm-6 col-md-4">
+        <div id="tipo-dados">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Tipos de variaveis</b></span>
           </div>
@@ -75,7 +75,7 @@
         </div>
       </div>
       <div class="col-sm-6 col-md-4">
-          <div id="interacao-usuario">
+        <div id="interacao-usuario">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Interação com Usuário</b></span>
           </div>
@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="col-sm-6 col-md-4">
-          <div id="operadores-aritmeticos">
+        <div id="operadores-aritmeticos">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Operadores Aritméticos</b></span>
           </div>
@@ -113,7 +113,7 @@
         </div>
       </div>
       <div class="col-sm-6 col-md-4">
-          <div id="operadores-logicos">
+        <div id="operadores-logicos">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Operadores Lógicos</b></span>
           </div>
@@ -132,7 +132,7 @@
       </div>
 
       <div class="col-sm-6 col-md-4">
-          <div id="estruturas-repeticao">
+        <div id="estruturas-repeticao">
           <div class="col-12 palavras-reservadas-titulo">
             <span><b>Estruturas de repetição</b></span>
           </div>
@@ -144,6 +144,18 @@
         </div>
       </div>
 
+      <div class="col-sm-6 col-md-4">
+        <div id="estruturas-repeticao">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Função</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>funcao</b> <b>nomeFuncao(</b> <i>variavel parametro</i> <b>) {</b> <i>código;</i><b> }</b></span><br>
+            <span><b>retorno</b> <i>valor</i></span>
+          </div>
+        </div>
+      </div>
+      <h2 style="color: #fff;"> Este é um easter Egg Jacquezera</h2>
     </div>
   </div>
 
