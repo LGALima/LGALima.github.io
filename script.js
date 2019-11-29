@@ -26,7 +26,7 @@ let palavrasReservadas = [
   { portuguese: /\be\b/i, javascriptCode: '&&' },
   { portuguese: /\bou\b/i, javascriptCode: '||' },
 
-  { portuguese: /\bfuncao\b/i, javascriptCode: 'function',  color: '#0404B4', tooltip: 'Declaração de um função'}
+  { portuguese: /\bfuncao\b/i, javascriptCode: 'function', color: '#0404B4', tooltip: 'Declaração de um função' }
 ];
 
 let simbolosReservados = ['&lt;:<', '&gt;:>'];
@@ -46,6 +46,7 @@ function compilar() {
       arrTexto[index] = verificarSintaxeDeAspas(linha, index);
     });
     codigo = arrTexto.join('<div>');
+    codigo = codigo.split('<span style="background-color: rgb(82, 82, 82);">').join('').split('</span>').join('');
     verificarSintaxeDeEscopo(codigo, '(', ')');
     verificarSintaxeDeEscopo(codigo, '{', '}');
     verificarSintaxeDeEscopo(codigo, '[', ']');
@@ -131,8 +132,8 @@ function contarElementos(linha, elemento) {
 }
 
 function validarVariavelComNomeReservadoJavascript(linha, nLinha) {
-  let partes = linha.split(' ').join().split(';').join().split('</div>').join('').split('=').join().split(',');
-  if (partes[0] === 'var') {
+  let partes = linha.split(' ').join().split(';').join().split('</div>').join('').split('=').join().split('()').join().split(',');
+  if (partes[0] === 'var' || partes[0] === 'function') {
     palavrasReservadas.forEach(palavra => {
       if (partes[1] === palavra.javascriptCode) {
         erroDeCompilacao('O nome ' + palavra.javascriptCode + ' é uma palavra reservada! Linha: ' + nLinha);
