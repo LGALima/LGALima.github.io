@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="compiladorStyle.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Didaticator</title>
+  <link href="images/fema.png" rel="icon">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark navbar-background">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row mt-3 no-gutters">
+
+      <div class="col-sm-6 col-12">
+        <div class="col-12" style="padding: 0px;">
+          <div class="entrada-header" onclick="compilar()"><b>Converter</b></div>
+        </div>
+        <div class="col-12" style="padding: 0px; height: 400px; display: block;">
+          <!--  -->
+          <div id="entrada-numeros-lateral"></div>
+          <div id="entrada" onkeydown="onKeyDown(event); selecionarLinha(event)" onscroll="onScrollContent()"
+            onkeyup="selecionarLinha();" spellcheck="false" contenteditable="true">
+          </div>
+          <!--  -->
+        </div>
+      </div>
+
+      <div class="col-sm-6 mt-sm-0 col-12">
+        <div class=" col-12 saida-header"><b>JavaScript</b></div>
+        <!--  -->
+        <div class="col-12" id="campo-codigo">
+          <div id="saida"></div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+    <div class="col-12" id="console"></div>
+  </div>
+
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Biblioteca</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div id="tipo-dados">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Tipos de variaveis</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>variavel</b> x = 0;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div id="interacao-usuario">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Interação com Usuário</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>imprima(</b><i> valor </i><b>);</b></span><br>
+            <span><i>variavel x =</i> <b>leiaNumero</b>;</span>
+            <span><i>variavel x =</i> <b>leiaTexto</b>;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div id="condicional">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Condicional</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>se(</b><i> condicao </i><b>) {</b> <i>código</i> <b>}</b></span><br>
+            <span><b>senao {</b> <i>código</i> <b>}</b></span><br>
+            <span><b>senaose(</b> <i>condição</i> <b>) {</b> <i>código</i> <b>}</b></span><br>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div id="operadores-aritmeticos">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Operadores Aritméticos</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span>Atribuição: <b>=</b></span><br>
+            <span>Subtração: <b>-</b></span><br>
+            <span>Adição: <b>+</b></span><br>
+            <span>Multiplicação: <b>*</b></span><br>
+            <span>Divisão: <b>/</b></span><br>
+            <span>Resto: <b>%</b></span><br>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div id="operadores-logicos">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Operadores Lógicos</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span>Inversor Lógico: <b>!</b>variavelQualquer</span><br>
+            <span>Igualdade: <b>==</b></span><br>
+            <span>Diferente: <b>!=</b></span><br>
+            <span>Maior que: <b>&gt;</b></span><br>
+            <span>Menor que: <b>&lt;</b></span><br>
+            <span>Maior ou Igual que: <b>&gt;=</b></span><br>
+            <span>Menor ou Igual que: <b>&lt;=</b></span><br>
+            <span>Ocorre ambas condições: <b>E</b></span><br>
+            <span>Ocorre pelomenos 1 condição: <b>OU</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div id="estruturas-repeticao">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Estruturas de repetição</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>enquanto(</b> <i>condição</i> <b>){</b> <i>código</i><b> }</b></span><br>
+            <span><b>para(</b>variavel x = 0; <i>condição</i>; <i>variavel de incremento</i><b>){</b> <i> código </i>
+              <b>}</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div id="estruturas-repeticao">
+          <div class="col-12 palavras-reservadas-titulo">
+            <span><b>Função</b></span>
+          </div>
+          <div class="col-12 palavras-reservadas-content">
+            <span><b>funcao</b> <b>nomeFuncao(</b> <i>variavel parametro</i> <b>) {</b> <i>código;</i><b> }</b></span><br>
+            <span><b>retorno</b> <i>valor</i></span>
+          </div>
+        </div>
+      </div>
+      <h2 style="color: #fff;"> Este é um easter Egg Jacquezera</h2>
+    </div>
+  </div>
+
+  <script src="compiladorScript.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
